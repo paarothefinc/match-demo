@@ -87,7 +87,7 @@ public abstract class DemoBase implements AutoCloseable {
         statement.setInt(2, event.getMarketId());
         statement.setString(3, event.getOutcomeId());
 
-        if (event.getSpecifiers().isEmpty()) {
+        if (event.getSpecifiers().isBlank()) {
             statement.setNull(4, Types.VARCHAR);
         } else {
             statement.setString(4, event.getSpecifiers());
@@ -102,13 +102,15 @@ public abstract class DemoBase implements AutoCloseable {
     }
 
     protected void outputHeader(final String title, final int batchSize) {
-        System.out.println("------------------------------------------");
+        System.out.println("-".repeat(50));
         System.out.println(title);
         System.out.println();
         System.out.printf("Batch/bag size: %d%n", batchSize);
     }
 
     protected void verifyResult(final int dbCallCounter, final boolean truncateTableAfterRun) throws SQLException {
+        System.out.printf("Total run time: %d ms%n", ChronoUnit.MILLIS.between(timer, Instant.now()));
+
         PreparedStatement statement = CONNECTION.prepareStatement(SQL_DURATION);
         ResultSet rs = statement.executeQuery();
         rs.next();
@@ -148,8 +150,6 @@ public abstract class DemoBase implements AutoCloseable {
         } catch (final SQLException | IOException e) {
             System.out.println(e.getMessage());
         }
-
-        System.out.printf("Total running time: %d ms%n", ChronoUnit.MILLIS.between(timer, Instant.now()));
     }
 }
 

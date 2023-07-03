@@ -14,7 +14,7 @@ public class Event {
         final String matchId = removeQuotes(split[0]);
         final int marketId = Integer.parseInt(split[1]);
         final String outcomeId = removeQuotes(split[2]);
-        final String specifiers = split[3].isEmpty() ? "" : removeQuotes(split[3]);
+        final String specifiers = split[3].isBlank() ? "" : removeQuotes(split[3]);
 
         this.matchId = matchId;
         this.marketId = marketId;
