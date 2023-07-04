@@ -141,7 +141,7 @@ I used a few approaches to the problem. Single thread, multi thread, batch/bag a
 final ExecutorService executorService = Executors.newFixedThreadPool(10);
 ```
 
-Tests for all implementations run in four variants: with 5, 10, 100 and 200 bag/batch sizes.
+Tests for all implementations run in four variants: with 100, 200, 500 and 1000 bag/batch sizes, with the exception of DemoFixedSizeBatchWithUniqueTimestamps, which runs with 100, 1000, 10000 and 100000 batch sizes.
 
 ### Batch
 
@@ -172,6 +172,10 @@ This implementation is also almost the same as the `DemoFixedSizeBag`, but now w
 ### DemoFixedSizeBagWithStoredProcedureMultiThreaded
 
 Again, this implementation is the same as the previous one bar writes to the database, which are done using the stored procedure. And again, timestamps must be generated in Java to assure proper order of events.
+
+### DemoFixedSizeBatchWithUniqueTimestamps
+
+Latest implementation, which takes advantage of unique generated timestamps in Java code. It is a single thread implementation with fixed batch size, but since all timestamps are unique, batches can be safely committed to the database.
 
 ## Output
 
