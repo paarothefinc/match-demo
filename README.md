@@ -175,7 +175,11 @@ Again, this implementation is the same as the previous one bar writes to the dat
 
 ### DemoFixedSizeBatchWithUniqueTimestamps
 
-Latest implementation, which takes advantage of unique generated timestamps in Java code. It is a single thread implementation with fixed batch size, but since all timestamps are unique, batches can be safely committed to the database.
+Implementation, which takes advantage of unique generated timestamps in Java code. It is a single thread implementation with fixed batch size, but since all timestamps are unique, batches can be safely committed to the database.
+
+### DemoConcurrentHashMapMultiThreaded
+
+Data read is distributed into Map<String, Queue<Event>>, where key=match ID and events form queue. One cosumer thread then infinitely loops over this map (from first to last key and then starting over at the beginning). Over one iteration, it gathers first element from each queue and then flushes data to the database. When all data is consumed, the thread stops.
 
 ## Output
 
