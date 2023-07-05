@@ -9,8 +9,16 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class DemoMaximumBatchSizeWithUniqueMatchIds extends DemoBase {
-    public void run(final int batchSize, final boolean truncateTableAfterRun) {
-        outputHeader("Maximum batch size with unique match IDs", batchSize);
+    int batchSize = 100;
+
+    public DemoMaximumBatchSizeWithUniqueMatchIds withBatchSize(final int batchSize) {
+        this.batchSize = batchSize;
+
+        return this;
+    }
+
+    public void run(final boolean truncateTableAfterRun) {
+        outputHeader("Maximum batch size with unique match IDs", String.format("Batch size: %d%n", batchSize));
 
         try (final PreparedStatement statement = CONNECTION.prepareStatement(SQL_INSERT)) {
             // set with only unique match IDs

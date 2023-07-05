@@ -11,8 +11,17 @@ import java.util.Iterator;
 import java.util.List;
 
 public class DemoFixedSizeBag extends DemoBase {
-    public void run(final int bagSize, final boolean truncateTableAfterRun) {
-        outputHeader("Bags with unique match IDs", bagSize);
+
+    int bagSize = 100;
+
+    public DemoFixedSizeBag withBagSize(final int bagSize) {
+        this.bagSize = bagSize;
+
+        return this;
+    }
+
+    public void run(final boolean truncateTableAfterRun) {
+        outputHeader("Bags with unique match IDs", String.format("Bag size: %d%n", bagSize));
 
         try {
             // list of bags. Bag can only contain events with unique match IDs

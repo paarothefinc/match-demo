@@ -80,7 +80,7 @@ public abstract class DemoBase implements AutoCloseable {
         return Timestamp.from(Instant.ofEpochSecond(0L, TIME_PROVIDER.currentTimeMicros() * 1000));
     }
 
-    public abstract void run(int batchSize, final boolean truncateTableAfterRun);
+    public abstract void run(final boolean truncateTableAfterRun);
 
     protected void setStatementParameters(final PreparedStatement statement, final Event event) throws SQLException {
         statement.setString(1, event.getMatchId());
@@ -101,11 +101,11 @@ public abstract class DemoBase implements AutoCloseable {
         statement.setTimestamp(5, dateInsert);
     }
 
-    protected void outputHeader(final String title, final int batchSize) {
+    protected void outputHeader(final String title, final String description) {
         System.out.println("-".repeat(50));
         System.out.println(title);
         System.out.println();
-        System.out.printf("Batch/bag size: %d%n", batchSize);
+        System.out.println(description);
     }
 
     protected void verifyResult(final int dbCallCounter, final boolean truncateTableAfterRun) throws SQLException {

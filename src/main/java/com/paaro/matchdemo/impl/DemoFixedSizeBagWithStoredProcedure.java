@@ -15,8 +15,16 @@ import java.util.Iterator;
 import java.util.List;
 
 public class DemoFixedSizeBagWithStoredProcedure extends DemoBase {
-    public void run(final int bagSize, final boolean truncateTableAfterRun) {
-        outputHeader("Bags with unique match IDs using the stored procedure", bagSize);
+    int bagSize = 100;
+
+    public DemoFixedSizeBagWithStoredProcedure withBagSize(final int bagSize) {
+        this.bagSize = bagSize;
+
+        return this;
+    }
+
+    public void run(final boolean truncateTableAfterRun) {
+        outputHeader("Bags with unique match IDs using the stored procedure", String.format("Bag size: %d%n", bagSize));
 
         try {
             final PreparedStatement statement = CONNECTION.prepareStatement(SQL_INSERT_PROCEDURE);

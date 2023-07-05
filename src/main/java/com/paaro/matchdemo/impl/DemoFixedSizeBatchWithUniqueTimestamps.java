@@ -7,8 +7,16 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class DemoFixedSizeBatchWithUniqueTimestamps extends DemoBase {
-    public void run(final int batchSize, final boolean truncateTableAfterRun) {
-        outputHeader("Fixed batch size with unique timestamps", batchSize);
+    int batchSize = 100;
+
+    public DemoFixedSizeBatchWithUniqueTimestamps withBatchSize(final int batchSize) {
+        this.batchSize = batchSize;
+
+        return this;
+    }
+
+    public void run(final boolean truncateTableAfterRun) {
+        outputHeader("Fixed batch size with unique timestamps", String.format("Batch size: %d%n", batchSize));
 
         try (final PreparedStatement statement = CONNECTION.prepareStatement(SQL_INSERT_WITH_TIMESTAMP)) {
             int eventCounter = 0;

@@ -1,5 +1,6 @@
 package com.paaro.matchdemo;
 
+import com.paaro.matchdemo.impl.DemoConcurrentHashMapMultiThreaded;
 import com.paaro.matchdemo.impl.DemoFixedSizeBag;
 import com.paaro.matchdemo.impl.DemoFixedSizeBagMultiThreaded;
 import com.paaro.matchdemo.impl.DemoFixedSizeBagWithStoredProcedure;
@@ -10,107 +11,111 @@ import com.paaro.matchdemo.impl.DemoMaximumBatchSizeWithUniqueMatchIds;
 public class Main {
     public static void main(final String[] args) {
         try (final DemoMaximumBatchSizeWithUniqueMatchIds demo = new DemoMaximumBatchSizeWithUniqueMatchIds()) {
-            demo.run(100, true);
+            demo.withBatchSize(100).run(true);
         }
 
         try (final DemoMaximumBatchSizeWithUniqueMatchIds demo = new DemoMaximumBatchSizeWithUniqueMatchIds()) {
-            demo.run(200, true);
+            demo.withBatchSize(200).run(true);
         }
 
         try (final DemoMaximumBatchSizeWithUniqueMatchIds demo = new DemoMaximumBatchSizeWithUniqueMatchIds()) {
-            demo.run(500, true);
+            demo.withBatchSize(500).run(true);
         }
 
         try (final DemoMaximumBatchSizeWithUniqueMatchIds demo = new DemoMaximumBatchSizeWithUniqueMatchIds()) {
-            demo.run(1000, true);
+            demo.withBatchSize(1000).run(true);
         }
 
         try (final DemoFixedSizeBag demo = new DemoFixedSizeBag()) {
-            demo.run(100, true);
+            demo.withBagSize(100).run(true);
         }
 
         try (final DemoFixedSizeBag demo = new DemoFixedSizeBag()) {
-            demo.run(200, true);
+            demo.withBagSize(200).run(true);
         }
 
         try (final DemoFixedSizeBag demo = new DemoFixedSizeBag()) {
-            demo.run(500, true);
+            demo.withBagSize(500).run(true);
         }
 
         try (final DemoFixedSizeBag demo = new DemoFixedSizeBag()) {
-            demo.run(1000, true);
+            demo.withBagSize(1000).run(true);
         }
 
         try (final DemoFixedSizeBagWithStoredProcedure demo = new DemoFixedSizeBagWithStoredProcedure()) {
-            demo.run(100, true);
+            demo.withBagSize(100).run(true);
         }
 
         try (final DemoFixedSizeBagWithStoredProcedure demo = new DemoFixedSizeBagWithStoredProcedure()) {
-            demo.run(200, true);
+            demo.withBagSize(200).run(true);
         }
 
         try (final DemoFixedSizeBagWithStoredProcedure demo = new DemoFixedSizeBagWithStoredProcedure()) {
-            demo.run(500, true);
+            demo.withBagSize(500).run(true);
         }
 
         try (final DemoFixedSizeBagWithStoredProcedure demo = new DemoFixedSizeBagWithStoredProcedure()) {
-            demo.run(1000, true);
+            demo.withBagSize(1000).run(true);
         }
 
         try (final DemoFixedSizeBagMultiThreaded demo = new DemoFixedSizeBagMultiThreaded()) {
-            demo.run(100, true);
+            demo.withBagSize(100).withNumberOfThreads(10).run(true);
         }
 
         try (final DemoFixedSizeBagMultiThreaded demo = new DemoFixedSizeBagMultiThreaded()) {
-            demo.run(200, true);
+            demo.withBagSize(200).withNumberOfThreads(10).run(true);
         }
 
         try (final DemoFixedSizeBagMultiThreaded demo = new DemoFixedSizeBagMultiThreaded()) {
-            demo.run(500, true);
+            demo.withBagSize(500).withNumberOfThreads(10).run(true);
         }
 
         try (final DemoFixedSizeBagMultiThreaded demo = new DemoFixedSizeBagMultiThreaded()) {
-            demo.run(1000, true);
+            demo.withBagSize(1000).withNumberOfThreads(10).run(true);
         }
 
         try (
             final DemoFixedSizeBagWithStoredProcedureMultiThreaded demo =
                 new DemoFixedSizeBagWithStoredProcedureMultiThreaded()) {
-            demo.run(100, true);
+            demo.withBagSize(100).withNumberOfThreads(10).run(true);
         }
 
         try (
             final DemoFixedSizeBagWithStoredProcedureMultiThreaded demo =
                 new DemoFixedSizeBagWithStoredProcedureMultiThreaded()) {
-            demo.run(200, true);
+            demo.withBagSize(200).withNumberOfThreads(10).run(true);
         }
 
         try (
             final DemoFixedSizeBagWithStoredProcedureMultiThreaded demo =
                 new DemoFixedSizeBagWithStoredProcedureMultiThreaded()) {
-            demo.run(500, true);
+            demo.withBagSize(500).withNumberOfThreads(10).run(true);
         }
 
         try (
             final DemoFixedSizeBagWithStoredProcedureMultiThreaded demo =
                 new DemoFixedSizeBagWithStoredProcedureMultiThreaded()) {
-            demo.run(1000, true);
+            demo.withBagSize(1000).withNumberOfThreads(10).run(true);
         }
 
         try (final DemoFixedSizeBatchWithUniqueTimestamps demo = new DemoFixedSizeBatchWithUniqueTimestamps()) {
-            demo.run(100, true);
+            demo.withBatchSize(100).run(true);
         }
 
         try (final DemoFixedSizeBatchWithUniqueTimestamps demo = new DemoFixedSizeBatchWithUniqueTimestamps()) {
-            demo.run(1000, true);
+            demo.withBatchSize(1000).run(true);
         }
 
         try (final DemoFixedSizeBatchWithUniqueTimestamps demo = new DemoFixedSizeBatchWithUniqueTimestamps()) {
-            demo.run(10000, true);
+            demo.withBatchSize(10000).run(true);
         }
 
         try (final DemoFixedSizeBatchWithUniqueTimestamps demo = new DemoFixedSizeBatchWithUniqueTimestamps()) {
-            demo.run(100000, true);
+            demo.withBatchSize(100000).run(true);
+        }
+
+        try (final DemoConcurrentHashMapMultiThreaded demo = new DemoConcurrentHashMapMultiThreaded()) {
+            demo.run(true);
         }
     }
 }

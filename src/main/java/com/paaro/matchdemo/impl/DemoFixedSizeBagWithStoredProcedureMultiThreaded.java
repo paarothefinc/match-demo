@@ -18,12 +18,27 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 public class DemoFixedSizeBagWithStoredProcedureMultiThreaded extends DemoBase {
-    public void run(final int bagSize, final boolean truncateTableAfterRun) {
-        outputHeader("Bags with unique match IDs with multi-threading (10 threads) using the stored procedure",
-            bagSize);
+    int bagSize = 100;
+    int numberOfThreads = 10;
+
+    public DemoFixedSizeBagWithStoredProcedureMultiThreaded withBagSize(final int bagSize) {
+        this.bagSize = bagSize;
+
+        return this;
+    }
+
+    public DemoFixedSizeBagWithStoredProcedureMultiThreaded withNumberOfThreads(final int numberOfThreads) {
+        this.numberOfThreads = numberOfThreads;
+
+        return this;
+    }
+
+    public void run(final boolean truncateTableAfterRun) {
+        outputHeader("Bags with unique match IDs with multi-threading using the stored procedure",
+            String.format("Bag size: %d, Number of threads: %d%n", bagSize, numberOfThreads));
 
         try {
-            final ExecutorService executorService = Executors.newFixedThreadPool(10);
+            final ExecutorService executorService = Executors.newFixedThreadPool(numberOfThreads);
 
             // list of bags. Bag can only contain events with unique match IDs
             final List<Bag<EventDbType>> bagList = new ArrayList<>();
